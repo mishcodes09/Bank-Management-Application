@@ -11,7 +11,7 @@ namespace BankAccountApplication
     {
         public string Owner { get; set; }
         public Guid AccountNumber { get; set; }
-        public decimal Balance { get; set; }
+        public decimal Balance { get; private set; }
 
         public BankAccount(string owner, decimal initialDeposit)
         {
@@ -20,32 +20,27 @@ namespace BankAccountApplication
             Balance = initialDeposit;
         }
 
-        public void Deposit(decimal amount)
+
+        public string Deposit(decimal amount)
         {
-            if (amount > 0)
-            {
-                Balance += amount; // Increase balance by the deposit amount
-            }
-            else
-            {
-                throw new ArgumentException("Deposit amount must be greater than zero.");
-            }
+            if (amount <= 0)
+                return "You cannot deposit $" + amount;
+            if (amount > 20000)
+                return "Deposit limit reached";
+
+            Balance += amount;
+            return "Deposit completed successfully";
         }
 
-        public void Withdraw(decimal amount)
+        public string Withdraw(decimal amount)
         {
-            if (amount > 0 && Balance >= amount)
-            {
-                Balance -= amount; // Reduce balance by withdrawal amount
-            }
-            else if (amount <= 0)
-            {
-                throw new ArgumentException("Withdrawal amount must be greater than zero.");
-            }
-            else
-            {
-                throw new InvalidOperationException("Insufficient funds for this withdrawal.");
-            }
+            if (amount <= 0)
+                return "You cannot withdraw $" + amount;
+            if (amount > Balance)
+                return "Sorry! You dont have enough money.";
+
+            Balance -= amount;
+            return "Withdraw completed successfully";
         }
     }
 }

@@ -1,4 +1,5 @@
 using BankAccountApplication;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace BankAccountApplication
 {
@@ -32,54 +33,40 @@ namespace BankAccountApplication
 
         private void btnDeposit_Click(object sender, EventArgs e)
         {
-            if (grid.SelectedRows.Count == 0)
+            if (grid.SelectedRows.Count != 1)
                 return;
 
-            //i need to get the selected account from the data grid
-            int selected = grid.SelectedRows[0].Index;
+            int selected = grid.SelectedRows[0].Index; // Gets the selected account from the data grid
             BankAccount selectedAccount = BankAccounts[selected];
 
-            //now i need to get the deposit amount from the numUpDown
-            decimal depositAmount = numUpDown.Value;
+            decimal depositAmount = numUpDown.Value; // Get the deposit amount from the numUpDown
 
-            //perform the deposit
-            try
-            {
-                selectedAccount.Deposit(depositAmount);
-                RefreshGrid();
-                MessageBox.Show($"Successfully deposited {depositAmount:C} into account.");
-            }
+            string message = selectedAccount.Deposit(depositAmount); // Perform the deposit and get the result message
 
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Deposit Error");
-            }
-
+            MessageBox.Show(message);
+            RefreshGrid();
+            numUpDown.Value = 0;
         }
 
         private void btnWithdraw_Click(object sender, EventArgs e)
         {
-            if (grid.SelectedRows.Count == 0)
+            if (grid.SelectedRows.Count != 1)
                 return;
 
+            // Get the selected account from the data grid
             int selected = grid.SelectedRows[0].Index;
             BankAccount selectedAccount = BankAccounts[selected];
 
+            // Get the withdrawal amount from the numUpDown
             decimal withdrawAmount = numUpDown.Value;
 
-            try
-            {  selectedAccount.Withdraw(withdrawAmount);
-               RefreshGrid();
-               MessageBox.Show($"Successfully withdrew {withdrawAmount:C} into account.");
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Withdrawal Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show(ex.Message, "Withdrawal Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            // Perform the withdrawal and get the result message
+            string message = selectedAccount.Withdraw(withdrawAmount);
+
+            // Show feedback to the user based on the result
+            MessageBox.Show(message);
+            RefreshGrid(); // Refresh the data grid to reflect the updated balance
+            numUpDown.Value = 0; // Reset the numeric up-down control
         }
     }
 }

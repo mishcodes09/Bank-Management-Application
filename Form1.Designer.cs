@@ -68,7 +68,8 @@
             // numUpDown
             // 
             numUpDown.Location = new Point(187, 352);
-            numUpDown.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            numUpDown.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
+            numUpDown.Minimum = new decimal(new int[] { 999999, 0, 0, int.MinValue });
             numUpDown.Name = "numUpDown";
             numUpDown.Size = new Size(180, 31);
             numUpDown.TabIndex = 3;
