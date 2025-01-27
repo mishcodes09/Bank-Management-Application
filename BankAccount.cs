@@ -13,13 +13,14 @@ namespace BankAccountApplication
         public Guid AccountNumber { get; set; }
         public decimal Balance { get; private set; }
 
+       
+
         public BankAccount(string owner, decimal initialDeposit)
         {
             Owner = owner;
             AccountNumber = Guid.NewGuid();
             Balance = initialDeposit;
         }
-
 
         public string Deposit(decimal amount)
         {

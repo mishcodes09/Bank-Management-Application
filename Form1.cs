@@ -13,16 +13,45 @@ namespace BankAccountApplication
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtOwner.Text))
+            if (string.IsNullOrEmpty(txtOwner.Text)) //sees if user has entered name
                 return;
 
-            decimal initialDeposit = numUpDown.Value; //gets the amount
-            BankAccount B1 = new BankAccount(txtOwner.Text, initialDeposit);
-            BankAccounts.Add(B1);
+            if (numInterest.Value > 0) //checks which type of bank account we want to make
+            {
+                //savings bank account
+                decimal initialDeposit = numUpDown.Value;
+                SavingsAccount S1 = new SavingsAccount(txtOwner.Text, numInterest.Value, initialDeposit);
+                BankAccounts.Add(S1); //adds to list
+            }
+
+            else
+            {
+                //regular bank account
+                decimal initialDeposit = numUpDown.Value; //gets the amount
+                BankAccount B1 = new BankAccount(txtOwner.Text, initialDeposit);
+                BankAccounts.Add(B1);
+            }
+
+            /* shorter way to write the above 
+             * 
+             * 
+             if (numInterest.Value > 0) 
+
+                decimal initialDeposit = numUpDown.Value;
+                BankAccounts.Add(new SavingsAccount(txtOwner.Text, numInterest.Value, initialDeposit)); 
+
+            else
+
+                decimal initialDeposit = numUpDown.Value; 
+                BankAccounts.Add(new BankAccount(txtOwner.Text, initialDeposit));
+            
+             */
+
 
             RefreshGrid();
             txtOwner.Clear();
             numUpDown.Value = 0;
+            numInterest.Value = 0;
         }
 
         private void RefreshGrid()

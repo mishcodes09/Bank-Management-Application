@@ -36,8 +36,12 @@
             btnDeposit = new Button();
             btnCreate = new Button();
             btnWithdraw = new Button();
+            numInterest = new NumericUpDown();
+            label1 = new Label();
+            lblInterest = new Label();
             ((System.ComponentModel.ISupportInitialize)numUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numInterest).BeginInit();
             SuspendLayout();
             // 
             // lblOwner
@@ -96,7 +100,7 @@
             // 
             // btnCreate
             // 
-            btnCreate.Location = new Point(187, 158);
+            btnCreate.Location = new Point(187, 217);
             btnCreate.Name = "btnCreate";
             btnCreate.Size = new Size(180, 34);
             btnCreate.TabIndex = 6;
@@ -114,11 +118,39 @@
             btnWithdraw.UseVisualStyleBackColor = true;
             btnWithdraw.Click += btnWithdraw_Click;
             // 
+            // numInterest
+            // 
+            numInterest.Location = new Point(256, 164);
+            numInterest.Name = "numInterest";
+            numInterest.Size = new Size(111, 31);
+            numInterest.TabIndex = 8;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(59, 25);
+            label1.TabIndex = 9;
+            label1.Text = "label1";
+            // 
+            // lblInterest
+            // 
+            lblInterest.AutoSize = true;
+            lblInterest.Location = new Point(82, 164);
+            lblInterest.Name = "lblInterest";
+            lblInterest.Size = new Size(145, 25);
+            lblInterest.TabIndex = 10;
+            lblInterest.Text = "Interest Rate (%):";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(977, 435);
+            Controls.Add(lblInterest);
+            Controls.Add(label1);
+            Controls.Add(numInterest);
             Controls.Add(btnWithdraw);
             Controls.Add(btnCreate);
             Controls.Add(btnDeposit);
@@ -131,6 +163,7 @@
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)numUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)grid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numInterest).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -145,5 +178,8 @@
         private Button btnDeposit;
         private Button btnCreate;
         private Button btnWithdraw;
+        private NumericUpDown numInterest;
+        private Label label1;
+        private Label lblInterest;
     }
 }
