@@ -16,18 +16,19 @@ namespace BankAccountApplication
             if (string.IsNullOrEmpty(txtOwner.Text)) //sees if user has entered name
                 return;
 
+            decimal initialDeposit = numUpDown.Value;
+
             if (numInterest.Value > 0) //checks which type of bank account we want to make
             {
                 //savings bank account
-                decimal initialDeposit = numUpDown.Value;
-                SavingsAccount S1 = new SavingsAccount(txtOwner.Text, numInterest.Value, initialDeposit);
+                decimal interestRate = numInterest.Value;
+                SavingsAccount S1 = new SavingsAccount(txtOwner.Text, initialDeposit, interestRate);
                 BankAccounts.Add(S1); //adds to list
             }
 
             else
             {
                 //regular bank account
-                decimal initialDeposit = numUpDown.Value; //gets the amount
                 BankAccount B1 = new BankAccount(txtOwner.Text, initialDeposit);
                 BankAccounts.Add(B1);
             }
@@ -80,7 +81,7 @@ namespace BankAccountApplication
         private void btnWithdraw_Click(object sender, EventArgs e)
         {
             if (grid.SelectedRows.Count != 1)
-                return;
+                return; 
 
             // Get the selected account from the data grid
             int selected = grid.SelectedRows[0].Index;

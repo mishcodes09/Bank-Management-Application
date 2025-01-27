@@ -11,7 +11,7 @@ namespace BankAccountApplication
     {
         public string Owner { get; set; }
         public Guid AccountNumber { get; set; }
-        public decimal Balance { get; private set; }
+        public decimal Balance { get; protected set; }
 
        
 
@@ -22,7 +22,7 @@ namespace BankAccountApplication
             Balance = initialDeposit;
         }
 
-        public string Deposit(decimal amount)
+        public virtual string Deposit(decimal amount) //virtual allows overrides
         {
             if (amount <= 0)
                 return "You cannot deposit $" + amount;
@@ -33,7 +33,7 @@ namespace BankAccountApplication
             return "Deposit completed successfully";
         }
 
-        public string Withdraw(decimal amount)
+        public virtual string Withdraw(decimal amount)
         {
             if (amount <= 0)
                 return "You cannot withdraw $" + amount;
